@@ -1,0 +1,49 @@
+<htmL>
+    <head></head>
+<h1>Input Field</h1>
+<input type="password" id="CCNInput"> 
+<h3 id="updated">Updated: </h3>
+
+<br><br>
+<h1>Obfuscated</h1>
+<input type="text" id="CCNOutput">
+
+<br><br>
+<H1>Actual</H1>
+<input type="text" id="CCN">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="obfuscateFront.js"></script>
+<script type="text/javascript" src="updatedCCNFront.js"></script>
+<script>  $(document).ready(function(){
+    let oldCCN = "";
+    let newCCN = "";
+    $("#CCNInput").change(function() {
+        $("#CCN").val($("#CCNInput").val());
+        $("#CCNOutput").val(onCCNChange($("#CCNInput").val()));
+    });
+
+    $("#CCNInput").focus(function() {
+        oldCCN = $("#CCNInput").val();
+    })
+
+    $("#CCNInput").blur(function() {
+        newCCN = $("#CCNInput").val();
+        onBlurHandler(oldCCN, newCCN);
+    })
+    
+
+    function onCCNChange(ccn){
+        return obfuscate(ccn);
+    };
+
+    function onBlurHandler(before, after){
+        let updated = updatedCCN(before, after);
+        $("#updated").html("Updated :" + updated);
+    }
+
+
+  });
+</script>
+</htmL>
